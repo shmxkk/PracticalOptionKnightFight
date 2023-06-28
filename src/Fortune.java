@@ -1,5 +1,10 @@
 public class Fortune implements Attributes {
     private int armor;
+    private DiceType dtype;
+    private int hitModifier;
+    private int hpBonus;
+    private String name;
+    
 
     public Fortune(String name, int hpBonus, int armor, int hitModifier) {
         this(name, hpBonus, armor, hitModifier, null);
@@ -15,21 +20,42 @@ public class Fortune implements Attributes {
 
     @Override
     public int getMaxHP() {
-        // TODO Auto-generated method stub
-        return 0;
+        // return the amount of bonus to the knights maxHP
+        return this.hpBonus;
     }
 
     @Override
     public DiceType getDamageDie() {
-        // TODO Auto-generated method stub
-        return null;
+        // DiceType of the knight damage die
+        return this.dtype;
     }
 
     @Override
     public int getHitModifier() {
-        // TODO Auto-generated method stub
-        return 0;
+        // Returns the bonus to the knights hit modifier.
+        return this.hitModifier;
     }
+
+    
+    public String getName() {
+        return this.name;
+    }
+
+   
+
+
+    public String toString() {
+        String formattedString = "";
+        formattedString += "+======================+\n";
+        formattedString += "|"+getName()+"             |\n";
+        formattedString += "|HP Bonus:"+getMaxHP()+"|\n";
+        formattedString += "|AC Bonus:"+getArmor()+"|\n";
+        formattedString += "|Hit Bonus:"+getHitModifier()+"|\n";
+        formattedString += "|Damage Adj:"+getDamageDie()+"|\n";
+        formattedString += "+======================+\n";
+        return formattedString;
+    }
+
 
     public static void main(String[] args) {
         Fortune ftn = new Fortune("Merlin Luck", 10, 5, 2, DiceType.D12);
