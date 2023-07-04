@@ -35,6 +35,10 @@ public class MOB implements Attributes {
     public int getHitModifier() {
         return this.hitModifier;
     }
+
+    public int getDamage(){
+        return this.damage;
+    }
     
     public void addDamage(int damage){
         this.damage += damage;
@@ -57,18 +61,18 @@ public class MOB implements Attributes {
     }
 
     public String toString(){
-        String formattedString = "";
-        formattedString += "+======================+\n";
-        formattedString += "|"+getName()+"             |\n";
-        formattedString += "|HP:"+getHP()+"|\n";
-        formattedString += "|AC:"+getArmor()+"|\n";
-        formattedString += "|Hit:"+getHitModifier()+"|\n";
-        formattedString += "|Damage:"+getDamageDie()+"|\n";
-        formattedString += "+======================+\n";
-        return formattedString;
+        return 
+        "+============================+\n" +
+        String.format("| %-27s|%n", getName()) +
+        "|                            |\n" +
+        String.format("|         Health: %-10d |%n", getHP())  +
+        String.format("|  Power: %-6s  Armor: %-4d|%n", getDamageDie().toString(), getArmor()) +
+        "|                            |\n" +
+        "+============================+";
     }
 
     public static void main(String[] args) {
-        
+        MOB m = new MOB("Mik", 10, 20, 30, DiceType.D4);
+        System.out.println(m);
     }
 }
