@@ -183,4 +183,13 @@ Knight.toCSV()
         }
     }
 
+
+    //Testing
+    public static void main(String[] args){
+        CSVGameData game = new CSVGameData("gamedata.csv", "save.csv");
+        System.out.println(game);
+        game.save("save.csv");
+    }
+
+
 }

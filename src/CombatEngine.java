@@ -143,7 +143,15 @@ GameData.getKnights()
         }
     }
 
-    
 
+
+    public static void main(String[] args) {
+        CombatEngine cbteng = new CombatEngine(new GameData(), new GameView());
+        cbteng.initialize();
+        cbteng.runCombat();
+        cbteng.clear();
+        System.out.println("CombatEngine.main() is not implemented yet");
+    }
+    
 
 }

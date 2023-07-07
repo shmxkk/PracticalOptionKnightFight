@@ -337,7 +337,17 @@ printDefeated in interface GameView
         System.out.println();
     }
 
-    
+    //test ConsolView
+    public static void main(String[] args){
+        ConsoleView consoleView = new ConsoleView();
+        consoleView.printWelcome();
+        consoleView.printGoodbye();
+        consoleView.printMenu();
+        consoleView.printKnights(new ArrayList<Knight>());
+        consoleView.printKnights(new ArrayList<Knight>(Arrays.asList(new Knight("Danu of Ireland", 10, 10, 10, 10, 10, 10, 10, 10, 10))));
+        consoleView.printKnights(new ArrayList<Knight>(Arrays.asList(new Knight("Danu of Ireland", 10, 10, 10, 10, 10, 10, 10, 10, 10), new Knight("Arthur", 10, 10, 10, 10, 10, 10, 10, 10, 10))));
+        consoleView.printKnights(new ArrayList<Knight>(Arrays.asList(new Knight("Danu of Ireland", 10, 10, 10, 10, 10, 10, 10, 10, 10), new Knight("Arthur", 10, 10, 10, 10, 10, 10, 10, 10, 10), new Knight("Gwain", 10, 10, 10, 10, 10, 10, 10, 10, 10))));
+    }
 
 
 }
