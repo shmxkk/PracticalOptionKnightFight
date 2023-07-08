@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.Scanner;
+
 public class ConsoleView extends Object implements GameView{
 
     /*
@@ -294,7 +297,7 @@ Fortune.toString() MOB.getName()
         System.out.println("For this quest, our knights drew the following fortunes!");
         for(Knight knight : activeKnights){
             System.out.println(knight.getName() + " drew");
-            System.out.println(knight.getFortune().toString());
+            System.out.println(knight.getActiveFortune().toString());
         }
         System.out.println();
     }
@@ -313,8 +316,7 @@ true if the client types y, or yes (case ignored) - else false for anything else
     @Override
     public boolean checkContinue(){
         System.out.println("Would you like to continue on your quest (y/n)? ");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        String input = this.in.nextLine();
         if(input.equalsIgnoreCase("y") || input.equalsIgnoreCase("yes")){
             return true;
         }else{
@@ -337,17 +339,12 @@ printDefeated in interface GameView
         System.out.println();
     }
 
-    //test ConsolView
+    //test ConsoleView
     public static void main(String[] args){
         ConsoleView consoleView = new ConsoleView();
-        consoleView.printWelcome();
-        consoleView.printGoodbye();
-        consoleView.printMenu();
-        consoleView.printKnights(new ArrayList<Knight>());
-        consoleView.printKnights(new ArrayList<Knight>(Arrays.asList(new Knight("Danu of Ireland", 10, 10, 10, 10, 10, 10, 10, 10, 10))));
-        consoleView.printKnights(new ArrayList<Knight>(Arrays.asList(new Knight("Danu of Ireland", 10, 10, 10, 10, 10, 10, 10, 10, 10), new Knight("Arthur", 10, 10, 10, 10, 10, 10, 10, 10, 10))));
-        consoleView.printKnights(new ArrayList<Knight>(Arrays.asList(new Knight("Danu of Ireland", 10, 10, 10, 10, 10, 10, 10, 10, 10), new Knight("Arthur", 10, 10, 10, 10, 10, 10, 10, 10, 10), new Knight("Gwain", 10, 10, 10, 10, 10, 10, 10, 10, 10))));
-    }
+        consoleView.splashScreen();
+        consoleView.printHelp();
+     }
 
 
 }

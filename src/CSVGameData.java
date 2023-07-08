@@ -1,3 +1,9 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 public class CSVGameData extends GameData{
 
 
@@ -91,7 +97,9 @@ A scanner loaded with a FileInputStream
 
     /*
      * void loadGameData(String gamedata)
-Loads game data based on fortunes or MOBs. first line of the CSV file determines type, the rest loads directly into a MOB or Fortune object. Stores MOBs in GameData.monsters and fortunes into GameData.fortunes. Any line that doesn't start with MOB or FORTUNE is ignored. As a reminder, a gamedata.csv file could look like the following:
+Loads game data based on fortunes or MOBs. first line of the CSV file determines type, the rest loads directly into a MOB or Fortune object. 
+Stores MOBs in GameData.monsters and fortunes into GameData.fortunes. Any line that doesn't start with MOB or FORTUNE is ignored. 
+As a reminder, a gamedata.csv file could look like the following:
         MOB,Kobold,25,9,-1,D4
         MOB,Umber Hulk,55,13,1,D6
         FORTUNE,Prowess,0,0,2,D12
@@ -113,21 +121,34 @@ gamedata - a game data CSV file with MOBs and Fortunes
             line.useDelimiter(","); 
             String type = line.next().trim();
             if(type.equals("MOB")) {
-                Monster mob = new Monster(
-                        line.next().trim(),
-                        line.nextInt(),
-                        line.nextInt(),
-                        line.nextInt(),
-                        DiceType.valueOf(line.next()));
-                monsters.add(mob);
+                try{
+                    MOB mob = new MOB(
+                            line.next().trim(),
+                            line.nextInt(),
+                            line.nextInt(),
+                            line.nextInt(),
+                            DiceType.valueOf(line.next()));
+                    monsters.add(mob);
+                }
+                catch(Exception e){
+                    //System.out.println("Error loading MOB: " + e.getMessage());
+                }
+             
             } else if(type.equals("FORTUNE")) {
-                Fortune ftn = new Fortune(
-                        line.next().trim(),
-                        line.nextInt(),
-                        line.nextInt(),
-                        line.nextInt(),
-                        DiceType.valueOf(line.next()));
-                fortunes.add(ftn);
+                try{
+                    Fortune ftn = new Fortune(
+                            line.next().trim(),
+                            line.nextInt(),
+                            line.nextInt(),
+                            line.nextInt(),
+                            DiceType.valueOf(line.next()));
+                    fortunes.add(ftn);
+                }
+                catch(Exception e){
+                    //System.out.println("Error loading Fortune: " + e.getMessage());
+                }
+ 
+                
             }
         }
     }
@@ -141,7 +162,7 @@ Optional helper method. We used this method to handle the actual parsing of each
     private void parseGameDataLine(Scanner line){
         String type = line.next().trim();
         if(type.equals("MOB")) {
-            Monster mob = new Monster(
+            MOB mob = new MOB(
                     line.next().trim(),
                     line.nextInt(),
                     line.nextInt(),
@@ -186,9 +207,9 @@ Knight.toCSV()
 
     //Testing
     public static void main(String[] args){
-        CSVGameData game = new CSVGameData("gamedata.csv", "save.csv");
+        CSVGameData game = new CSVGameData("gamedata.csv", "knights.csv");
         System.out.println(game);
-        game.save("save.csv");
+        //game.save("save.csv");
     }
 
 

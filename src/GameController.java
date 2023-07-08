@@ -77,8 +77,8 @@ true unless exit or bye is used.
             String[] parts = command.split(" ");
             if(parts.length == 2){
                 try{
-                    int id = Integer.parseInt(parts[1]);
-                    view.showKnight(data.getKnight(id));
+                    //int id = Integer.parseInt(parts[1]);
+                    view.showKnight(data.getKnight(parts[1]));
                 }
                 catch(NumberFormatException e){
                     view.showKnight(data.getKnight(parts[1]));
@@ -89,11 +89,11 @@ true unless exit or bye is used.
             String[] parts = command.split(" ");
             if(parts.length == 3){
                 try{
-                    int id = Integer.parseInt(parts[2]);
-                    data.setActiveKnight(data.getKnight(id));
+                    //int id = Integer.parseInt(parts[2]);
+                    data.setActive(data.getKnight(parts[2]));
                 }
                 catch(NumberFormatException e){
-                    data.setActiveKnight(data.getKnight(parts[2]));
+                    data.setActive(data.getKnight(parts[2]));
                 }
             }
         }
@@ -101,21 +101,21 @@ true unless exit or bye is used.
             String[] parts = command.split(" ");
             if(parts.length == 2){
                 try{
-                    int id = Integer.parseInt(parts[1]);
-                    data.removeActiveKnight(data.getKnight(id));
+                    //int id = Integer.parseInt(parts[1]);
+                    data.removeActive(data.getKnight(parts[1]));
                 }
                 catch(NumberFormatException e){
-                    data.removeActiveKnight(data.getKnight(parts[1]));
+                    data.removeActive(data.getKnight(parts[1]));
                 }
             }
         }
         else if(command.contains("save")){
             String[] parts = command.split(" ");
             if(parts.length == 2){
-                data.saveKnights(parts[1]);
+                data.save(parts[1]);
             }
             else{
-                data.saveKnights();
+                data.save("saveData.csv");
             }
         }
         else if(command.contains("explore") || command.contains("adventure") || command.contains("quest")){
@@ -138,9 +138,9 @@ remove - the id or name of knight to remove
      */
 
     private void processRemoveActive(String remove){
-        Knight knight = data.getActiveKnight(remove);
+        Knight knight = data.getActive(remove);
         if(knight != null){
-            data.removeActiveKnight(knight);
+            data.removeActive(knight);
         }
         else{
             view.knightNotFound();
@@ -158,7 +158,7 @@ active -
     private void processSetActive(String active){
         Knight knight = data.getKnight(active);
         if(knight != null){
-            if(!data.setActiveKnight(knight)){
+            if(!data.setActive(knight)){
                 view.setActiveFailed();
             }
         }
@@ -187,7 +187,7 @@ nameOrId -
 
     //test
     public static void main(String[] args){
-        GameData data = new CSVGameData("saveData.csv");
+        GameData data = new CSVGameData("gamedata.csv", "knights.csv");
         GameView view = new ConsoleView();
         CombatEngine engine = new CombatEngine(data, view);
         GameController controller = new GameController(data, view, engine);

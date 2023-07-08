@@ -16,6 +16,17 @@ public class Knight extends MOB {
         this.xp += xp;
     }
 
+    /*
+     * public Integer getId()
+Gets the knights id as an Integer (not int). Integer is used, as toString is often used in other parts other program.
+Returns:
+the Integer value of the id.
+     */
+
+    public Integer getId(){
+        return this.id;
+    }
+
    public Fortune getActiveFortune(){
         return this.activeFortune;
     }

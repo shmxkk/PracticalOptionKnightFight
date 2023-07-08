@@ -1,4 +1,8 @@
-public abstract class GameData extends OBject{
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public abstract class GameData extends Object{
 
     protected final List<Knight> activeKnights;
     //List of the active knights, they are references, not copies.
@@ -9,13 +13,14 @@ public abstract class GameData extends OBject{
     protected final List<Knight> knights;
     //List of all the knights available
 
-    private static final int MAX_ACTIVE;
+    private static final int MAX_ACTIVE = 4;
     //the max number of active knights (defined by specifications to be 4)
 
     protected final List<MOB> monsters;
     //List of MOBs/Monsters
 
-    private static final Random random;
+    private static final Random random = new Random();
+
     //Random number generator, used for grabbing random items for the structures.
 
     public GameData(){
@@ -40,7 +45,9 @@ public abstract class GameData extends OBject{
 
     /*
      * public Knight getKnight(String nameOrId)
-Gets an knight from the all knights list based on a string or id. The string can be word in the knights name, and will return the first knight that it comes across that matches that string. The id is supposed to be unique, and will find the knight with that idea, immediately returning the knight. Uses findKnight to accomplish the task.
+Gets an knight from the all knights list based on a string or id. The string can be word in the knights name, and will return the first knight 
+that it comes across that matches that string. The id is supposed to be unique, and will find the knight with that idea, 
+immediately returning the knight. Uses findKnight to accomplish the task.
 Parameters:
 nameOrId - string or ID as a string
 Returns:
@@ -57,7 +64,8 @@ findKnight(String, List)
     /*
      * protected Knight findKnight(String nameOrId,
  List<Knight> list)
-Finds a knight based on nameOrId based on the a List of knights passed into it. The name can be any part of the name (contains), but the ID must exactly match. Case does not matter for names. Note for students: getId() returns an Integer (not int), so you can call toString, and just compare Strings. That is valid, no need to parse.
+Finds a knight based on nameOrId based on the a List of knights passed into it. The name can be any part of the name (contains), 
+but the ID must exactly match. Case does not matter for names. Note for students: getId() returns an Integer (not int), so you can call toString, and just compare Strings. That is valid, no need to parse.
 Parameters:
 nameOrId - a name or id string
 list - the list of knights to search - often knights or activeKnights

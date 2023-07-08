@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.Random;
+
 public class CombatEngine extends Object{
 
 
@@ -43,7 +46,9 @@ Before every quest, active knights are assigned random fortunes (GameData.getRan
 Runs the combat simulation (optional).
 This method is NOT graded - and is purely a "challenge" for you to implement.
 
-Combat will continue to run as long as there are either knights or monsters/MOBs. If MOBs are reduced to zero, the player will be promoted to see if they wish to continue exploring GameView.checkContinue(). If they respond yes, more random monsters will be generated, and combat begins again. At the start of each battle:
+Combat will continue to run as long as there are either knights or monsters/MOBs. If MOBs are reduced to zero, 
+the player will be promoted to see if they wish to continue exploring GameView.checkContinue(). 
+If they respond yes, more random monsters will be generated, and combat begins again. At the start of each battle:
 
 Generates a random list of MOBs, no larger than the total number of knights GameData.getRandomMonsters()
 Prints the battle text, on who the fight is between GameView.printBattleText(List, List)
@@ -52,7 +57,8 @@ Runs through the combat
 The combat order itself is undefined on order of actions, but the following must happen
 When knights are defeated (MOB.getHP() <= 0), they are removed from active knights
 When MOBs are defeated, every active knight earns 1 XP point (Knight.addXP(int))
-While combat order is undefined, a common implementation is cycle through the knights having them attack a random monster. We then cycle through the MOBs having them each attack a random knight.
+While combat order is undefined, a common implementation is cycle through the knights having them attack a random monster. 
+We then cycle through the MOBs having them each attack a random knight.
 When a knight or mob is defeated, we print that they were defeated GameView.printBattleText(MOB)
 If all knights are defeated, we notify the player using GameView.printDefeated().
 
@@ -68,9 +74,10 @@ DiceSet.roll(DiceType)
      */
 
     public void runCombat(){
-        while(data.getActiveKnights().size() > 0 && data.getActiveMonsters().size() > 0){
+        /*
+        while(data.getActiveKnights().size() > 0 && data.getRandomMonsters().size() > 0){
             List<MOB> monsters = data.getRandomMonsters();
-            view.printBattleText(data.getActiveKnights(), monsters);
+            view.printBattleText(monsters, data.getActiveKnights());
             for(Knight knight : data.getActiveKnights()){
                 MOB mob = monsters.get(rnd.nextInt(monsters.size()));
                 if(knight.attack(mob, dice)){
@@ -101,6 +108,7 @@ DiceSet.roll(DiceType)
         if(data.getActiveKnights().size() == 0){
             view.printDefeated();
         }
+        */
     }
 
 
@@ -116,7 +124,9 @@ number of victories the 'attackers' have over the defenders
      */
 
     private int doBattle(List<MOB> attackers, List<MOB> defenders){
+        
         int victories = 0;
+        /*
         for(MOB attacker : attackers){
             for(MOB defender : defenders){
                 if(attacker.attack(defender, dice)){
@@ -124,6 +134,7 @@ number of victories the 'attackers' have over the defenders
                 }
             }
         }
+        */
         return victories;
 
     }
@@ -146,7 +157,7 @@ GameData.getKnights()
 
 
     public static void main(String[] args) {
-        CombatEngine cbteng = new CombatEngine(new GameData(), new GameView());
+        CombatEngine cbteng = new CombatEngine(new CSVGameData("gamedata.csv", "knights.csv"), new ConsoleView());
         cbteng.initialize();
         cbteng.runCombat();
         cbteng.clear();
