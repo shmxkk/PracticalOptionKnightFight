@@ -110,19 +110,13 @@ Armor: %-4d
 
     public String toCSV(){
         String formattedString = "";
-        formattedString += this.id + ",";
         formattedString += this.getName() + ",";
         formattedString += this.getHP() + ",";
         formattedString += this.getArmor() + ",";
         formattedString += this.getHitModifier() + ",";
         formattedString += this.getDamageDie() + ",";
-        formattedString += this.getXP() + ",";
-        if (this.getActiveFortune() == null){
-            formattedString += "null";
-        }
-        else{
-            formattedString += this.getActiveFortune().getName();
-        }
+        formattedString += this.getXP();
+        
         return formattedString;
     }
 

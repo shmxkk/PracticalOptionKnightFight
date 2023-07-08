@@ -31,7 +31,8 @@ saveData - A data file containing knights
 
 /*
  * void loadSaveData(String saveData)
-Loads in the data from a knights CSV file. Constructs a new Knight and adds it to the Knight List GameData.knights. Starts a counter for the IDs, with each new knight being assigned an ID in order of which they are read from the file While there are many ways to implement this method, but with that said, we wanted provide a skeleton of what we used.
+Loads in the data from a knights CSV file. Constructs a new Knight and adds it to the Knight List GameData.knights. Starts a counter for the IDs, 
+with each new knight being assigned an ID in order of which they are read from the file While there are many ways to implement this method, but with that said, we wanted provide a skeleton of what we used.
 
         int counter = 0;
         Scanner file = readFile(saveData);
@@ -118,65 +119,118 @@ gamedata - a game data CSV file with MOBs and Fortunes
         if(file == null) return;
         while(file.hasNextLine()) {
             Scanner line = new Scanner(file.nextLine());
-            line.useDelimiter(","); 
-            String type = line.next().trim();
-            if(type.equals("MOB")) {
-                try{
-                    MOB mob = new MOB(
-                            line.next().trim(),
-                            line.nextInt(),
-                            line.nextInt(),
-                            line.nextInt(),
-                            DiceType.valueOf(line.next()));
-                    monsters.add(mob);
-                }
-                catch(Exception e){
-                    //System.out.println("Error loading MOB: " + e.getMessage());
-                }
-             
-            } else if(type.equals("FORTUNE")) {
-                try{
-                    Fortune ftn = new Fortune(
-                            line.next().trim(),
-                            line.nextInt(),
-                            line.nextInt(),
-                            line.nextInt(),
-                            DiceType.valueOf(line.next()));
-                    fortunes.add(ftn);
-                }
-                catch(Exception e){
-                    //System.out.println("Error loading Fortune: " + e.getMessage());
-                }
- 
-                
-            }
+            parseGameDataLine(line);
         }
     }
 
 
     /*
      * private void parseGameDataLine(Scanner line)
-Optional helper method. We used this method to handle the actual parsing of each line of the gamedata.csv. You may also further break this up into two private methods, one for MOB and one for FORTUNE lines. That could help keep your code concise.
+Optional helper method. We used this method to handle the actual parsing of each line of the gamedata.csv. You may also further break this up into two private methods, 
+one for MOB and one for FORTUNE lines. That could help keep your code concise.
      */
 
     private void parseGameDataLine(Scanner line){
+        line.useDelimiter(","); 
         String type = line.next().trim();
+        String name;
+        int hp;
+        int armor;
+        int hitModifier;
+        DiceType damageDie;
         if(type.equals("MOB")) {
+                 
+            try{
+                name = line.next().trim();
+            }
+            catch(Exception e){
+                name = "blah";
+            }
+
+            try{
+                hp = line.nextInt();
+            }
+            catch(Exception e){
+                hp = 10;
+            }
+
+            try{
+                armor = line.nextInt();
+            }
+            catch(Exception e){
+                armor = 10;
+            }
+
+            try{
+                hitModifier = line.nextInt();
+            }
+            catch(Exception e){
+                hitModifier = 10;
+            }
+
+            try{
+                damageDie = DiceType.valueOf(line.next());
+
+            }
+            catch(Exception e){
+                damageDie = DiceType.D4;
+            }
+
+
             MOB mob = new MOB(
-                    line.next().trim(),
-                    line.nextInt(),
-                    line.nextInt(),
-                    line.nextInt(),
-                    DiceType.valueOf(line.next()));
+                    name,
+                    hp,
+                    armor,
+                    hitModifier,
+                    damageDie);
             monsters.add(mob);
+
         } else if(type.equals("FORTUNE")) {
+             try{
+                name = line.next().trim();
+            }
+            catch(Exception e){
+                name = "blah";
+            }
+
+            try{
+                hp = line.nextInt();
+            }
+            catch(Exception e){
+                hp = 10;
+            }
+
+            try{
+                armor = line.nextInt();
+            }
+            catch(Exception e){
+                armor = 10;
+            }
+
+            try{
+                hitModifier = line.nextInt();
+            }
+            catch(Exception e){
+                hitModifier = 10;
+            }
+
+            try{
+                damageDie = DiceType.valueOf(line.next());
+
+            }
+            catch(Exception e){
+                damageDie = DiceType.D4;
+            }
+
             Fortune ftn = new Fortune(
-                    line.next().trim(),
-                    line.nextInt(),
-                    line.nextInt(),
-                    line.nextInt(),
-                    DiceType.valueOf(line.next()));
-            fortunes.add(ftn);
+                    name,
+                    hp,
+                    armor,
+                    hitModifier,
+                    damageDie);
+
+            
+                fortunes.add(ftn);
         }
     }
 
@@ -209,7 +263,10 @@ Knight.toCSV()
     public static void main(String[] args){
         CSVGameData game = new CSVGameData("gamedata.csv", "knights.csv");
         System.out.println(game);
-        //game.save("save.csv");
+        game.save("save.csv");
+        for(MOB mob : game.monsters) {
+            System.out.println(mob);
+        }
     }
 
 
