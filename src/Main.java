@@ -1,8 +1,8 @@
 public class Main extends Object{
 
-    private static String gamedata;
+    private static String gamedata = "gamedata.csv";
     //The location of the game data.
-    private static String saveData;
+    private static String saveData = "knights.csv";
     //The location of the saved file, with a default (new game) file being knights.csv.
 
     public Main(){
@@ -36,7 +36,8 @@ args - the command line arguments option
 
     /*
      * private static void processArgs(String[] args)
-loops through each each program argument (args). checks to see if the argument starts with --data. If it starts with data, takes the substring of the argument (after the = sign) to set the gamedata. else, any other argument sets the saveData value (even if it has been set)
+loops through each each program argument (args). checks to see if the argument starts with --data. If it starts with data, takes the substring of the argument (after the = sign) to set the gamedata. 
+else, any other argument sets the saveData value (even if it has been set)
 Parameters:
 args -
      */
