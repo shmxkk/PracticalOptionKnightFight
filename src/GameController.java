@@ -124,7 +124,8 @@ true unless exit or bye is used.
             engine.clear();
         }
         else{
-            view.displayMainMenu();
+            view.printHelp();
+            //view.displayMainMenu();
         }
         return true;
 

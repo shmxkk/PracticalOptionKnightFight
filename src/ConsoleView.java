@@ -23,7 +23,7 @@ splashScreen in interface GameView
      */
     @Override
     public void splashScreen(){
-        System.out.println("Welcome to the Knights of the Round Table!");
+        //System.out.println("Welcome to the Knights of the Round Table!");
     }
     
     /*
@@ -56,7 +56,7 @@ Scanner.nextLine() Scanner System.in
 
     @Override
     public String displayMainMenu(){
-        System.out.println("What would you like to do?");
+        System.out.print("What would you like to do? ");
         return in.nextLine();
     }
 

@@ -73,7 +73,7 @@ Armor: %-4d
         String.format("| id: %-23d|%n", getID()) +
         "|                            |\n" +
         String.format("| Health: %-6d  XP: %-7d|%n", getHP(), getXP()) +
-        String.format("|  Power: %-6d  Armor: %-4d|%n", getHitModifier(), getArmor()) +
+        String.format("|  Power: %-6s  Armor: %-4d|%n", getDamageDie().toString(), getArmor()) +
         "|                            |\n" +
         "+============================+";
     }
